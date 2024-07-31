@@ -2,7 +2,7 @@ const std = @import("std");
 const testing = std.testing;
 const binary_tree = @import("binary_tree.zig");
 const meta = @import("meta.zig");
-const Node = binary_tree.Node(u8);
+const Node = binary_tree.Node(u8, u8);
 
 export fn add(a: i32, b: i32) i32 {
     return a + b;
@@ -22,6 +22,7 @@ test "basic isNumberType functionality" {
 }
 
 test "basic Node init functionality" {
-    const node = Node.init(42);
+    const node = Node.init(1, 42);
     try testing.expect(node.value == 42);
+    try testing.expect(node.key == 1);
 }
