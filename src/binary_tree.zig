@@ -1,15 +1,17 @@
 const std = @import("std");
 const meta = @import("meta.zig");
 
-pub fn Node(comptime T: type) type {
-    if (!meta.isNumberType(T)) @compileError("T must be a number type");
+pub fn Node(comptime K: type, comptime V: type) type {
+    if (!meta.isNumberType(K)) @compileError("T must be a number type");
     return struct {
-        value: T,
-        lesser_node: ?*Node(T) = null,
-        greater_node: ?*Node(T) = null,
+        key: K,
+        value: V,
+        lesser_node: ?*Node(K, V) = null,
+        greater_node: ?*Node(K, V) = null,
 
-        pub fn init(value: T) Node(T) {
-            return Node(T){
+        pub fn init(key: K, value: V) Node(K, V) {
+            return Node(K, V){
+                .key = key,
                 .value = value,
             };
         }
